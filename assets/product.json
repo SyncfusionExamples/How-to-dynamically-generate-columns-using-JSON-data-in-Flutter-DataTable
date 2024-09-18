@@ -1,0 +1,47 @@
+[
+    {
+        "Product_ID": "1",
+        "Product_Name": "Apple",
+        "Price": "3000",
+        "Quantity": "50",
+        "Shipping City": "Chennai",
+        "State": "Tamil Nadu",
+        "Country": "India"
+    },
+    {
+        "Product_ID": "2",
+        "Product_Name": "Banana",
+        "Price": "2000",
+        "Quantity": "100",
+        "Shipping City": "Mumbai",
+        "State": "Maharashtra",
+        "Country": "India"
+    },
+    {
+        "Product_ID": "3",
+        "Product_Name": "Orange",
+        "Price": "2500",
+        "Quantity": "40",
+        "Shipping City": "Banglore",
+        "State": "Karnataka",
+        "Country": "India"
+    },
+    {
+        "Product_ID": "4",
+        "Product_Name": "Grapes",
+        "Price": "4000",
+        "Quantity": "45",
+        "Shipping City": "Visakhapatnam",
+        "State": "Andhra Pradesh",
+        "Country": "India"
+    },
+    {
+        "Product_ID": "5",
+        "Product_Name": "Mango",
+        "Price": "2500",
+        "Quantity": "50",
+        "Shipping City": "Tirvandrum",
+        "State": "Kerala",
+        "Country": "India"
+    }
+]

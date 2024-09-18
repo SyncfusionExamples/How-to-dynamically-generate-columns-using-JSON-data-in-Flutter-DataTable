@@ -1,12 +1,33 @@
-# How to dynamically generate columns using JSON data in a Flutter DataTable (SfDataGrid)?.
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
-In this article, we will show you how to dynamically generate columns using JSON data in a [Flutter DataTable](https://www.syncfusion.com/flutter-widgets/flutter-datagrid).
+void main() {
+  runApp(const MyApp());
+}
 
-Initialize the [SfDataGrid](https://pub.dev/documentation/syncfusion_flutter_datagrid/latest/datagrid/SfDataGrid-class.html) widget with all the necessary properties. Retrieve the JSON data using the [http.get](https://pub.dev/documentation/http/latest/http/Client/get.html) method and decode it. Then, convert the JSON data into a list collection. Once the data is loaded, the first item from the JSON (productlist[0]) is used to generate the columns. Each key in this first item becomes a column header by iterating over the key-value pairs of the first JSON object. The [DataGridSource](https://pub.dev/documentation/syncfusion_flutter_datagrid/latest/datagrid/DataGridSource-class.html) class maps the JSON data to the DataGrid rows. The columns are passed as an argument, and for each row, the values corresponding to those columns are extracted.
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
-```dart
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Syncfusion DataGrid Demo',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: const JsonDataGrid(),
+    );
+  }
+}
+
+class JsonDataGrid extends StatefulWidget {
+  const JsonDataGrid({Key? key}) : super(key: key);
+
+  @override
+  JsonDataGridState createState() => JsonDataGridState();
+}
+
 class JsonDataGridState extends State<JsonDataGrid> {
-
   late JsonDataGridSource jsonDataGridSource;
   List<dynamic> productlist = [];
   List<GridColumn> columns = [];
@@ -67,8 +88,6 @@ class JsonDataGridState extends State<JsonDataGrid> {
 }
 
 class JsonDataGridSource extends DataGridSource {
-….
-
   JsonDataGridSource(List<dynamic> productlist, List<GridColumn> columns) {
     dataGridRows = productlist
         .map<DataGridRow>((product) => DataGridRow(
@@ -79,7 +98,20 @@ class JsonDataGridSource extends DataGridSource {
             }).toList()))
         .toList();
   }
-}
-```
 
-You can download this example on [GitHub](https://github.com/SyncfusionExamples/How-to-dynamically-generate-columns-using-JSON-data-in-Flutter-DataTable).
+  List<DataGridRow> dataGridRows = [];
+
+  @override
+  List<DataGridRow> get rows => dataGridRows;
+
+  @override
+  DataGridRowAdapter? buildRow(DataGridRow row) {
+    return DataGridRowAdapter(
+        cells: row.getCells().map<Widget>((dataGridCell) {
+      return Container(
+          padding: const EdgeInsets.all(8),
+          alignment: Alignment.center,
+          child: Text(dataGridCell.value.toString()));
+    }).toList());
+  }
+}
